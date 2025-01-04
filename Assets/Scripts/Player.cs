@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public GameObject hitbox;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     public GameObject lightningRight;
     public GameObject lightningLeft;
     public bool attackingDown;
+    public int score;
 
     // Update is called once per frame
     void Update()
@@ -65,6 +67,7 @@ public class Player : MonoBehaviour
         else if (health == 0)
         {
             Health1.SetActive(false);
+            SceneManager.LoadScene("TitleScene");
         }
         if (ultCharge <= 3)
         {

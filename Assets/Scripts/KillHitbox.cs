@@ -32,6 +32,7 @@ public class KillHitbox : MonoBehaviour
             }
             pScript.ultCharge += 1;
             pScript.killCount += 1;
+            pScript.score += 1;
             Destroy(collision.gameObject);
         }
         
