@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
     public GameObject lightningLeft;
     public bool attackingDown;
     public int score;
-
+    public InterstitialAds interstitialAds;
+    public BannerAds bannerAds;
     // Update is called once per frame
     void Update()
     {
@@ -64,10 +65,10 @@ public class Player : MonoBehaviour
         {
             Health2.SetActive(false);
         }
-        else if (health == 0)
+        else if (health <= 0)
         {
             Health1.SetActive(false);
-            SceneManager.LoadScene("TitleScene");
+            StartCoroutine(Die());
         }
         if (ultCharge <= 3)
         {
@@ -111,6 +112,14 @@ public class Player : MonoBehaviour
         go.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         go.SetActive(false);
+    }
+    private IEnumerator Die()
+    {
+        bannerAds.HideBannerAd();
+        yield return new WaitForSeconds(1.0f);
+        interstitialAds.TestAd();
+        yield return new WaitForSeconds(4.0f);
+        SceneManager.LoadScene("TitleScene");
     }
     void detectInput()
     {
