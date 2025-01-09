@@ -34,6 +34,17 @@ public class Player : MonoBehaviour
     public static int highScore;
     public InterstitialAds interstitialAds;
     public BannerAds bannerAds;
+    public bool loading;
+
+    private void Awake()
+    {
+        if (loading)
+        {
+            highScore = SaveManager.instance.state.highScore;
+            SaveManager.instance.Load();
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -68,8 +79,21 @@ public class Player : MonoBehaviour
         }
         else if (health <= 0)
         {
+
             Health1.SetActive(false);
-            StartCoroutine(Die());
+            if (score > highScore)
+            {
+                highScore = score;
+                if (loading)
+                {
+                    SaveManager.instance.state.highScore = highScore;
+                    SaveManager.instance.Save();
+                }    
+               
+            }
+            bannerAds.HideBannerAd();
+            interstitialAds.TestAd();
+            SceneManager.LoadScene("TitleScene");
         }
         if (ultCharge <= 3)
         {
@@ -114,18 +138,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         go.SetActive(false);
     }
-    private IEnumerator Die()
-    {
-        if (score > highScore)
-        {
-            highScore = score;
-        }
-        bannerAds.HideBannerAd();
-        yield return new WaitForSeconds(1.0f);
-        interstitialAds.TestAd();
-        yield return new WaitForSeconds(4.0f);
-        SceneManager.LoadScene("TitleScene");
-    }
+  
     void detectInput()
     {
         if (Input.touchCount > 0)

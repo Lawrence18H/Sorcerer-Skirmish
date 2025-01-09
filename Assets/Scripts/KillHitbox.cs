@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using CandyCoded.HapticFeedback;
 public class KillHitbox : MonoBehaviour
 {
     Player pScript;
     CinemachineFunctions cScript;
     ButtonFunctions bScript;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +27,21 @@ public class KillHitbox : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("hit");
+            float pitchlevel = (Random.Range(8, 14) * 0.1f);
+            audioSource.pitch = pitchlevel;
+            audioSource.Play();
             if (ButtonFunctions.screenShakeOn)
             {
                 cScript.ShakeCamera(2.5f, 0.1f);
+            }
+            switch (ButtonFunctions.vibration)
+            {
+                case 2:
+                    HapticFeedback.LightFeedback();
+                    break;
+                case 3:
+                    HapticFeedback.MediumFeedback();
+                    break; 
             }
             pScript.ultCharge += 1;
             pScript.killCount += 1;
