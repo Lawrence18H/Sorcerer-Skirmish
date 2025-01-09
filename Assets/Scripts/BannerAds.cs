@@ -46,6 +46,7 @@ public class BannerAds : MonoBehaviour
         };
 
         // Load the Ad Unit with banner content:
+        
         Advertisement.Banner.Load(_adUnitId, options);
     }
 

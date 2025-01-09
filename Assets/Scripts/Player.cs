@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public GameObject lightningLeft;
     public bool attackingDown;
     public int score;
+    public static int highScore;
     public InterstitialAds interstitialAds;
     public BannerAds bannerAds;
     // Update is called once per frame
@@ -115,6 +116,10 @@ public class Player : MonoBehaviour
     }
     private IEnumerator Die()
     {
+        if (score > highScore)
+        {
+            highScore = score;
+        }
         bannerAds.HideBannerAd();
         yield return new WaitForSeconds(1.0f);
         interstitialAds.TestAd();
