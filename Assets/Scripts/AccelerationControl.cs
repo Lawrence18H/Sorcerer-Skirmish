@@ -19,8 +19,13 @@ public class AccelerationControl : MonoBehaviour
         accelerationDir = Input.acceleration;
         if (accelerationDir.sqrMagnitude >= 7f)
         {
-            pScript.timer = 0;
-            pScript.health = 3;
+            if (ButtonFunctions.shakeOn)
+            {
+                pScript.timer = 0;
+
+            }
+            
+            
         }
         //have ultimate attack vary on how long device is shook
     }

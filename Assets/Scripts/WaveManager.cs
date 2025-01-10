@@ -53,8 +53,8 @@ public class WaveManager : MonoBehaviour
             else if (enemyToSpawn == 3)
             {
                 enemy = enemy3;
-                spawn1.position = new Vector3(-10, 0.7f, 0);
-                spawn2.position = new Vector3(10, 0.7f, 0);
+                spawn1.position = new Vector3(-10, 0.65f, 0);
+                spawn2.position = new Vector3(10, 0.65f, 0);
             }
            
             int spawnLocation = Random.Range(1, 10);
